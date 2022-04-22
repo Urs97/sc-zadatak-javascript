@@ -23,6 +23,11 @@ window.onload = async function() {
     // On load logic
     if (!isNaN(urlPage) && urlPage > maxPage) {
         currentPage = maxPage;
+        // Updating URL query parameter page
+        if (history.pushState) {
+            var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + `?page=${currentPage}`;
+            window.history.pushState({path:newurl},'',newurl);
+        }
     } else if (!isNaN(urlPage) && urlPage >= '1') {
         currentPage = urlPage
     } else if (urlPage < 1 || isNaN(urlPage)) {
